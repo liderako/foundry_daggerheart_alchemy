@@ -1,0 +1,88 @@
+<div class="mist-alchemy-editor-body">
+	{{#*inline "potionSlot"}}
+		<div class="mist-alchemy-dropzone potion" data-drop="{{slot.id}}">
+			<div class="label">{{#if slot.hidden}}<i class="fa-solid fa-eye-slash" inert></i> {{/if}}{{slot.label}}</div>
+			{{#if slot.item}}
+				<img src="{{slot.item.img}}" alt="">
+				<span>{{slot.item.name}}{{#if slot.clearable}} <a data-action="clearSlot" data-tooltip="{{localize "MIST_ALCHEMY.Book.Remove"}}"><i class="fa-solid fa-xmark" inert></i></a>{{/if}}</span>
+			{{else}}
+				<span class="slot empty"><i class="fa-solid fa-flask" inert></i></span>
+			{{/if}}
+			<span class="hint">{{slot.hint}}</span>
+		</div>
+	{{/inline}}
+	<div class="mist-alchemy-potions">
+		{{#each mainSlots as |slot|}}{{> potionSlot slot=slot}}{{/each}}
+	</div>
+	<h3>{{localize "MIST_ALCHEMY.Editor.Variants"}}</h3>
+	<p class="hint">{{localize "MIST_ALCHEMY.Editor.VariantsHint"}}</p>
+	<div class="mist-alchemy-potions variants">
+		{{#each variantSlots as |slot|}}{{> potionSlot slot=slot}}{{/each}}
+	</div>
+
+	<h3>{{localize "MIST_ALCHEMY.Editor.Mixes"}}</h3>
+	<label class="mist-alchemy-toggle">
+		<input type="checkbox" name="blockAlcohol" {{#if recipe.blockAlcohol}}checked{{/if}}>
+		{{localize "MIST_ALCHEMY.Editor.BlockAlcohol"}}
+	</label>
+	{{#if recipe.blockAlcohol}}
+		<p class="hint">{{localize "MIST_ALCHEMY.Editor.BlockAlcoholHint"}}</p>
+	{{else}}
+	<p class="hint">{{localize "MIST_ALCHEMY.Editor.MixesHint"}}</p>
+	{{#each mixes as |mix|}}
+		<section class="mist-alchemy-mix" data-mix-id="{{mix.id}}">
+			<header>
+				<img src="{{mix.img}}" alt="">
+				<strong>{{mix.vessel}}</strong>
+				<a data-action="removeMix" data-tooltip="{{localize "MIST_ALCHEMY.Editor.RemoveMix"}}"><i class="fa-solid fa-trash" inert></i></a>
+			</header>
+			<div class="mist-alchemy-potions mix">
+				{{#each mix.slots as |slot|}}{{> potionSlot slot=slot}}{{/each}}
+			</div>
+		</section>
+	{{/each}}
+	<div class="mist-alchemy-dropzone" data-drop="mix"><i class="fa-solid fa-wine-bottle" inert></i> {{localize "MIST_ALCHEMY.Editor.DropMix"}}</div>
+	{{/if}}
+
+	<div class="form-group">
+		<label>{{localize "MIST_ALCHEMY.Editor.Rarity"}}</label>
+		<select name="rarity">
+			{{#each rarities as |rarity|}}
+				<option value="{{rarity.id}}" {{#if rarity.selected}}selected{{/if}}>{{rarity.label}}</option>
+			{{/each}}
+		</select>
+	</div>
+	<div class="form-group">
+		<label>{{localize "MIST_ALCHEMY.Editor.Difficulty"}}</label>
+		<input type="number" name="difficulty" value="{{difficulty}}" min="1" {{#unless isCustom}}disabled{{/unless}}>
+	</div>
+
+	<h3>{{localize "MIST_ALCHEMY.Editor.Research"}}</h3>
+	<p class="hint">{{localize "MIST_ALCHEMY.Editor.ResearchHint"}}</p>
+	<div class="form-group">
+		<label>{{localize "MIST_ALCHEMY.Editor.ResearchDifficulty"}}</label>
+		<input type="number" name="researchDifficulty" value="{{research.difficulty}}" min="1" placeholder="{{research.autoDifficulty}}">
+	</div>
+	<div class="form-group">
+		<label>{{localize "MIST_ALCHEMY.Editor.ResearchProgress"}}</label>
+		<input type="number" name="researchProgress" value="{{research.progress}}" min="1" placeholder="{{research.autoProgress}}">
+	</div>
+
+	<h3>{{localize "MIST_ALCHEMY.Editor.Ingredients" total=total}}</h3>
+	<div class="form-group">
+		<label>{{localize "MIST_ALCHEMY.Editor.AnyIngredients"}}</label>
+		<input type="number" name="anyIngredients" value="{{recipe.anyIngredients}}" min="0">
+	</div>
+	<p class="hint">{{localize "MIST_ALCHEMY.Editor.NamedHint"}}</p>
+	<ul class="mist-alchemy-named">
+		{{#each recipe.ingredients as |entry index|}}
+			<li data-index="{{index}}">
+				<img src="{{entry.img}}" alt="">
+				<span class="name">{{entry.name}}</span>
+				<input type="number" min="1" value="{{entry.quantity}}" data-ingredient-index="{{index}}">
+				<a data-action="removeIngredient" data-tooltip="{{localize "MIST_ALCHEMY.Book.Remove"}}"><i class="fa-solid fa-xmark" inert></i></a>
+			</li>
+		{{/each}}
+	</ul>
+	<div class="mist-alchemy-dropzone" data-drop="ingredient">{{localize "MIST_ALCHEMY.Editor.DropNamed"}}</div>
+</div>

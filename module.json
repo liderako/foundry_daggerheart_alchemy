@@ -1,0 +1,49 @@
+{
+	"id": "mist-age-alchemy",
+	"title": "The Mist Age - Alchemy",
+	"description": "Potion crafting for Daggerheart: the GM keeps a book of recipes and chooses which recipes each character knows. A character brews a known potion by putting its ingredients and a vessel (a vial, a bottle) into the alchemy window and making a Knowledge action roll against the recipe's difficulty.",
+	"version": "1.0.0",
+	"compatibility": {
+		"minimum": "13",
+		"verified": "14"
+	},
+	"authors": [
+		{
+			"name": "asvirido"
+		}
+	],
+	"relationships": {
+		"systems": [
+			{
+				"id": "daggerheart",
+				"type": "system"
+			}
+		]
+	},
+	"esmodules": [
+		"scripts/main.js"
+	],
+	"styles": [
+		"styles/alchemy.css"
+	],
+	"languages": [
+		{
+			"lang": "en",
+			"name": "English",
+			"path": "languages/en.json"
+		},
+		{
+			"lang": "ru",
+			"name": "Русский",
+			"path": "languages/ru.json"
+		},
+		{
+			"lang": "uk",
+			"name": "Українська",
+			"path": "languages/uk.json"
+		}
+	],
+	"url": "",
+	"manifest": "",
+	"download": ""
+}

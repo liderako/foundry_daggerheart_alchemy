@@ -1,0 +1,46 @@
+# Pushing a tag vX.Y.Z (or publishing a GitHub release with that tag) builds the Foundry package:
+# module.json gets that version plus the manifest/download URLs of this repository, and module.json + module.zip
+# are attached to the release, which is created for a pushed tag. Foundry installs from the stable manifest URL:
+#   https://github.com/<owner>/<repo>/releases/latest/download/module.json
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set version and URLs in module.json
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          REPO_URL="https://github.com/${GITHUB_REPOSITORY}"
+          jq --arg version "$VERSION" \
+             --arg url "$REPO_URL" \
+             --arg manifest "$REPO_URL/releases/latest/download/module.json" \
+             --arg download "$REPO_URL/releases/download/${GITHUB_REF_NAME}/module.zip" \
+             '.version = $version | .url = $url | .manifest = $manifest | .download = $download' \
+             module.json > module.tmp.json
+          mv module.tmp.json module.json
+
+      - name: Build module.zip
+        run: zip -r module.zip module.json README.md LICENSE scripts styles templates languages
+
+      # A release created here with the workflow token does not trigger this workflow again.
+      - name: Create the release for a pushed tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
+
+      - name: Attach to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" module.json module.zip --clobber

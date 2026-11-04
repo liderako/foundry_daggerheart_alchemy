@@ -1,0 +1,52 @@
+<div class="mist-alchemy-actor-body">
+	<label class="mist-alchemy-toggle">
+		<input type="checkbox" name="enabled" {{#if enabled}}checked{{/if}}>
+		{{localize "MIST_ALCHEMY.Actor.Enabled"}}
+	</label>
+	<p class="hint">{{localize "MIST_ALCHEMY.Actor.EnabledHint"}}</p>
+
+	<h3>{{localize "MIST_ALCHEMY.Actor.Known"}}</h3>
+	{{#if recipes.length}}
+		<ul class="mist-alchemy-known">
+			{{#each recipes as |recipe|}}
+				<li>
+					<label>
+						<input type="checkbox" data-recipe-id="{{recipe.id}}" {{#if recipe.known}}checked{{/if}}>
+						<img src="{{recipe.img}}" alt="">
+						<span class="name">{{recipe.name}}</span>
+						<span class="dc">{{recipe.difficulty}}</span>
+					</label>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p class="hint">{{localize "MIST_ALCHEMY.Actor.NoRecipes"}}</p>
+	{{/if}}
+
+	<h3>{{localize "MIST_ALCHEMY.Actor.Projects"}}</h3>
+	{{#if projects.length}}
+		<ul class="mist-alchemy-known mist-alchemy-projects">
+			{{#each projects as |project|}}
+				<li>
+					<img src="{{project.img}}" alt="">
+					<span class="name">{{project.name}}</span>
+					<input type="number" min="0" value="{{project.counter}}" data-project-id="{{project.id}}"> / {{project.needed}}
+					<a data-remove-project="{{project.id}}" data-tooltip="{{localize "MIST_ALCHEMY.Actor.RemoveProject"}}"><i class="fa-solid fa-xmark" inert></i></a>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p class="hint">{{localize "MIST_ALCHEMY.Actor.NoProjects"}}</p>
+	{{/if}}
+
+	<h3>{{localize "MIST_ALCHEMY.Actor.Recognised"}}</h3>
+	<div class="mist-alchemy-recognised-summary">
+		<span>{{localize "MIST_ALCHEMY.Actor.RecognisedCount" have=recognised.have total=recognised.total}}</span>
+		<button type="button" data-action="openRecognised"><i class="fa-solid fa-eye" inert></i> {{localize "MIST_ALCHEMY.Actor.RecognisedOpen"}}</button>
+	</div>
+
+	<footer class="mist-alchemy-actions">
+		<button type="button" data-action="openBook"><i class="fa-solid fa-book-skull" inert></i> {{localize "MIST_ALCHEMY.Actor.OpenBook"}}</button>
+		<button type="button" data-action="openCraft"><i class="fa-solid fa-flask-vial" inert></i> {{localize "MIST_ALCHEMY.Actor.OpenCraft"}}</button>
+	</footer>
+</div>

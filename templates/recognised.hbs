@@ -1,0 +1,47 @@
+<div class="mist-alchemy-recognised-body">
+	<p class="hint">{{localize "MIST_ALCHEMY.Actor.RecognisedHint"}}</p>
+	<input type="search" name="filter" value="{{filter}}" placeholder="{{localize "MIST_ALCHEMY.Recognised.Search"}}">
+	{{#each recipes as |recipe|}}
+		<details data-recipe-id="{{recipe.id}}" {{#if recipe.open}}open{{/if}}>
+			<summary>
+				<img src="{{recipe.img}}" alt="">
+				<span class="name">{{recipe.name}}</span>
+				{{#if recipe.learnt}}<i class="fa-solid fa-book" data-tooltip="{{localize "MIST_ALCHEMY.Recognised.Learnt"}}" inert></i>{{/if}}
+				<span class="count {{#if recipe.have}}some{{/if}}">{{recipe.have}}/{{recipe.total}}</span>
+			</summary>
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						{{#each ../columns as |column|}}<th>{{column}}</th>{{/each}}
+					</tr>
+				</thead>
+				<tbody>
+					{{#each recipe.rows as |row|}}
+						<tr>
+							<th>
+								<a data-action="toggleRow" data-tooltip="{{localize "MIST_ALCHEMY.Recognised.ToggleRow"}}">
+									<img src="{{row.img}}" alt=""> {{row.label}}
+								</a>
+							</th>
+							{{#each row.cells as |cell|}}
+								<td>
+									{{#if cell}}
+										<label data-tooltip="{{cell.name}}">
+											<input type="checkbox" data-outcome-key="{{cell.key}}" {{#if cell.known}}checked{{/if}}>
+											<img src="{{cell.img}}" alt="">
+										</label>
+									{{else}}
+										<span class="empty">—</span>
+									{{/if}}
+								</td>
+							{{/each}}
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</details>
+	{{else}}
+		<p class="hint">{{localize "MIST_ALCHEMY.Actor.NoOutcomes"}}</p>
+	{{/each}}
+</div>

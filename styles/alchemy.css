@@ -1,0 +1,661 @@
+.mist-alchemy .window-content {
+	padding: 0.5rem;
+	overflow-y: auto;
+}
+
+.mist-alchemy h3 {
+	margin: 0.5rem 0 0.25rem;
+	font-size: var(--font-size-14);
+	border-bottom: 1px solid var(--color-border, #7a7971);
+}
+
+.mist-alchemy .hint {
+	font-size: var(--font-size-12);
+	opacity: 0.75;
+}
+
+.mist-alchemy ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.mist-alchemy li {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.2rem 0.25rem;
+	border-radius: 4px;
+}
+
+.mist-alchemy li img,
+.mist-alchemy header img {
+	width: 28px;
+	height: 28px;
+	flex: none;
+	border: none;
+	object-fit: contain;
+}
+
+.mist-alchemy li .name {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.mist-alchemy .dc {
+	font-weight: bold;
+	opacity: 0.8;
+}
+
+.mist-alchemy a.disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+.mist-alchemy .slot {
+	display: inline-flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 6px;
+	border: 1px solid var(--color-border, #7a7971);
+	background: rgba(0, 0, 0, 0.15);
+}
+
+.mist-alchemy .slot.empty {
+	border-style: dashed;
+	opacity: 0.55;
+}
+
+.mist-alchemy .slot img {
+	width: 38px;
+	height: 38px;
+	border: none;
+	object-fit: contain;
+}
+
+.mist-alchemy .slot .count {
+	position: absolute;
+	right: 2px;
+	bottom: 0;
+	font-weight: bold;
+	text-shadow: 0 0 3px #000;
+	color: #fff;
+}
+
+.mist-alchemy .drag-over {
+	outline: 2px solid var(--color-warm-2, #ff6400);
+	background: rgba(255, 100, 0, 0.12);
+}
+
+.mist-alchemy-dropzone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	margin: 0.4rem 0;
+	padding: 0.6rem;
+	border: 2px dashed var(--color-border, #7a7971);
+	border-radius: 6px;
+	text-align: center;
+	opacity: 0.85;
+}
+
+/* Craft window */
+
+.mist-alchemy-craft .mist-alchemy-columns {
+	display: grid;
+	grid-template-columns: 190px 1fr 210px;
+	gap: 0.6rem;
+	height: 100%;
+}
+
+.mist-alchemy-craft section {
+	min-width: 0;
+	overflow-y: auto;
+}
+
+.mist-alchemy-craft .mist-alchemy-recipes li {
+	cursor: pointer;
+}
+
+.mist-alchemy-craft .mist-alchemy-recipes li:hover,
+.mist-alchemy-craft .mist-alchemy-recipes li.selected {
+	background: rgba(255, 100, 0, 0.15);
+}
+
+.mist-alchemy-craft .mist-alchemy-recipes li.selected {
+	outline: 1px solid var(--color-warm-2, #ff6400);
+}
+
+.mist-alchemy-craft .mist-alchemy-target {
+	display: flex;
+	gap: 0.6rem;
+	align-items: center;
+}
+
+.mist-alchemy-craft .mist-alchemy-target img {
+	width: 56px;
+	height: 56px;
+}
+
+.mist-alchemy-craft .mist-alchemy-target h3 {
+	border: none;
+	margin: 0;
+	font-size: var(--font-size-16);
+}
+
+.mist-alchemy-craft .mist-alchemy-target div {
+	display: flex;
+	flex-direction: column;
+}
+
+.mist-alchemy-craft .mist-alchemy-needs {
+	margin: 0.4rem 0;
+}
+
+.mist-alchemy-craft .mist-alchemy-needs li img {
+	width: 20px;
+	height: 20px;
+}
+
+.mist-alchemy-craft .mist-alchemy-needs li b {
+	margin-left: auto;
+}
+
+.mist-alchemy-craft .mist-alchemy-needs li.done {
+	color: var(--color-level-success, #18520b);
+}
+
+.mist-alchemy-craft .mist-alchemy-cauldron,
+.mist-alchemy-craft .mist-alchemy-vessel {
+	margin: 0.4rem 0;
+	padding: 0.5rem;
+	border: 2px dashed var(--color-border, #7a7971);
+	border-radius: 8px;
+}
+
+.mist-alchemy-craft .mist-alchemy-cauldron .slots {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	margin: 0.35rem 0;
+}
+
+.mist-alchemy-craft .mist-alchemy-vessel {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.mist-alchemy-craft .mist-alchemy-vessel .label {
+	width: 100%;
+}
+
+.mist-alchemy .label {
+	font-weight: bold;
+	font-size: var(--font-size-12);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.mist-alchemy-craft .mist-alchemy-inventory li {
+	cursor: grab;
+}
+
+.mist-alchemy-craft .mist-alchemy-inventory li.inactive {
+	opacity: 0.45;
+}
+
+.mist-alchemy-craft .mist-alchemy-inventory .qty {
+	font-weight: bold;
+}
+
+.mist-alchemy .mist-alchemy-actions {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.6rem;
+}
+
+.mist-alchemy .mist-alchemy-actions button.brew {
+	flex: 2;
+}
+
+.mist-alchemy-craft .busy {
+	pointer-events: none;
+	opacity: 0.7;
+}
+
+.mist-alchemy-warning {
+	padding: 0.3rem 0.5rem;
+	border-radius: 4px;
+	background: rgba(200, 120, 0, 0.2);
+}
+
+/* Recipe book */
+
+.mist-alchemy-tabs {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 0.4rem;
+	border-bottom: 1px solid var(--color-border, #7a7971);
+}
+
+.mist-alchemy-tabs a {
+	padding: 0.25rem 0.4rem;
+}
+
+.mist-alchemy-tabs a.active {
+	font-weight: bold;
+	border-bottom: 2px solid var(--color-warm-2, #ff6400);
+}
+
+.mist-alchemy-recipe-list li {
+	border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.mist-alchemy-recipe-list li img {
+	width: 36px;
+	height: 36px;
+}
+
+.mist-alchemy-recipe-list .info {
+	flex: 1;
+	min-width: 0;
+}
+
+.mist-alchemy-materials {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.75rem;
+}
+
+/* Recipe editor */
+
+.mist-alchemy-editor .mist-alchemy-potions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.5rem;
+}
+
+.mist-alchemy-editor .mist-alchemy-dropzone.potion img {
+	width: 48px;
+	height: 48px;
+	border: none;
+}
+
+.mist-alchemy-editor .form-group {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0.3rem 0;
+}
+
+.mist-alchemy-editor .form-group label {
+	flex: 1;
+}
+
+.mist-alchemy-editor .form-group select,
+.mist-alchemy-editor .form-group input {
+	flex: 1;
+}
+
+.mist-alchemy-named input[type="number"] {
+	width: 4rem;
+	flex: none;
+}
+
+/* Actor settings */
+
+.mist-alchemy-toggle {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-weight: bold;
+}
+
+.mist-alchemy-known label {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	width: 100%;
+}
+
+/* Chat card */
+
+.mist-alchemy-chat header {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.mist-alchemy-chat header img {
+	width: 40px;
+	height: 40px;
+	border: none;
+}
+
+.mist-alchemy-chat h3 {
+	margin: 0;
+}
+
+.mist-alchemy-chat .mist-alchemy-outcome {
+	font-weight: bold;
+	margin: 0.4rem 0 0.2rem;
+}
+
+.mist-alchemy-chat.critical .mist-alchemy-outcome {
+	color: #b38600;
+}
+
+.mist-alchemy-chat.successHope .mist-alchemy-outcome,
+.mist-alchemy-chat.successFear .mist-alchemy-outcome {
+	color: #2c7a2c;
+}
+
+.mist-alchemy-chat.failureHope .mist-alchemy-outcome,
+.mist-alchemy-chat.failureFear .mist-alchemy-outcome {
+	color: #a33;
+}
+
+.mist-alchemy-chat .mist-alchemy-spent {
+	font-size: var(--font-size-12);
+	opacity: 0.8;
+}
+
+.mist-alchemy-craft .mist-alchemy-recipes li.unknown img,
+.mist-alchemy-craft .mist-alchemy-recipes li.unknown .name {
+	opacity: 0.5;
+}
+
+.mist-alchemy-craft .known-toggle {
+	flex: none;
+}
+
+.mist-alchemy-editor .mist-alchemy-potions.variants {
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.mist-alchemy-editor .mist-alchemy-mix {
+	margin: 0.4rem 0;
+	padding: 0.4rem;
+	border: 1px solid var(--color-border, #7a7971);
+	border-radius: 6px;
+}
+
+.mist-alchemy-editor .mist-alchemy-mix header {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.mist-alchemy-editor .mist-alchemy-mix header strong {
+	flex: 1;
+}
+
+.mist-alchemy-editor .mist-alchemy-potions.mix {
+	grid-template-columns: repeat(5, 1fr);
+	gap: 0.3rem;
+}
+
+.mist-alchemy-editor .mist-alchemy-potions.mix .mist-alchemy-dropzone {
+	padding: 0.3rem;
+	font-size: var(--font-size-11);
+}
+
+.mist-alchemy-editor .mist-alchemy-potions.mix img {
+	width: 32px;
+	height: 32px;
+}
+
+.mist-alchemy-chat .mist-alchemy-mixed {
+	font-style: italic;
+	margin: 0.3rem 0 0;
+}
+
+.mist-alchemy-craft .mist-alchemy-mix-note {
+	width: 100%;
+	font-style: italic;
+	color: var(--color-warm-2, #ff6400);
+}
+
+.mist-alchemy-count input[type="number"] {
+	width: 100%;
+	text-align: center;
+	font-size: var(--font-size-16);
+}
+
+.mist-alchemy-chat .mist-alchemy-recognised {
+	font-weight: bold;
+}
+
+.mist-alchemy-book .mist-alchemy-alcohol {
+	opacity: 0.35;
+}
+
+.mist-alchemy-book .mist-alchemy-alcohol.active {
+	opacity: 1;
+	color: var(--color-warm-2, #ff6400);
+}
+
+.mist-alchemy-actor .mist-alchemy-outcomes {
+	max-height: 320px;
+	overflow-y: auto;
+}
+
+.mist-alchemy-actor .mist-alchemy-outcome-group header {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin-top: 0.4rem;
+	font-weight: bold;
+}
+
+.mist-alchemy-actor .mist-alchemy-outcome-group header img {
+	width: 22px;
+	height: 22px;
+	border: none;
+}
+
+.mist-alchemy-actor .mist-alchemy-outcome-group ul {
+	padding-left: 1rem;
+}
+
+/* Recognised results */
+
+.mist-alchemy-recognised-summary {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.mist-alchemy-recognised-summary span {
+	flex: 1;
+}
+
+.mist-alchemy-recognised-summary button {
+	flex: none;
+	width: auto;
+}
+
+.mist-alchemy-recognised input[type="search"] {
+	width: 100%;
+	margin: 0.3rem 0 0.5rem;
+}
+
+.mist-alchemy-recognised details {
+	border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.mist-alchemy-recognised summary {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.25rem 0;
+	cursor: pointer;
+}
+
+.mist-alchemy-recognised summary img {
+	width: 26px;
+	height: 26px;
+	border: none;
+}
+
+.mist-alchemy-recognised summary .name {
+	flex: 1;
+}
+
+.mist-alchemy-recognised summary .count {
+	opacity: 0.6;
+	font-weight: bold;
+}
+
+.mist-alchemy-recognised summary .count.some {
+	opacity: 1;
+	color: var(--color-warm-2, #ff6400);
+}
+
+.mist-alchemy-recognised table {
+	width: 100%;
+	margin: 0.2rem 0 0.5rem;
+	border-collapse: collapse;
+	font-size: var(--font-size-12);
+}
+
+.mist-alchemy-recognised th,
+.mist-alchemy-recognised td {
+	padding: 0.15rem 0.3rem;
+	text-align: center;
+}
+
+.mist-alchemy-recognised tbody th {
+	text-align: left;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.mist-alchemy-recognised tbody th a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+}
+
+.mist-alchemy-recognised table img {
+	width: 22px;
+	height: 22px;
+	border: none;
+	vertical-align: middle;
+}
+
+.mist-alchemy-recognised td label {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.2rem;
+}
+
+.mist-alchemy-recognised tbody tr:nth-child(odd) {
+	background: rgba(127, 127, 127, 0.08);
+}
+
+.mist-alchemy-recognised .empty {
+	opacity: 0.4;
+}
+
+/* Research */
+
+.mist-alchemy-craft > .window-content .mist-alchemy-tabs,
+.mist-alchemy-craft .mist-alchemy-tabs {
+	margin-bottom: 0.4rem;
+}
+
+.mist-alchemy-craft .mist-alchemy-progress {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0.4rem 0;
+}
+
+.mist-alchemy-craft .mist-alchemy-progress .bar {
+	flex: 1;
+	height: 10px;
+	border-radius: 5px;
+	background: rgba(127, 127, 127, 0.25);
+	overflow: hidden;
+}
+
+.mist-alchemy-craft .mist-alchemy-progress .bar span {
+	display: block;
+	height: 100%;
+	background: var(--color-warm-2, #ff6400);
+}
+
+.mist-alchemy-actor .mist-alchemy-projects input[type="number"] {
+	width: 3.5rem;
+	flex: none;
+}
+
+/* GM panel */
+
+.mist-alchemy-hub .mist-alchemy-hub-top {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.mist-alchemy-hub .mist-alchemy-hub-top .hint {
+	flex: 1;
+	margin: 0;
+}
+
+.mist-alchemy-hub .mist-alchemy-hub-top button {
+	flex: none;
+	width: auto;
+}
+
+.mist-alchemy-hub table {
+	width: 100%;
+	margin-top: 0.5rem;
+	border-collapse: collapse;
+}
+
+.mist-alchemy-hub th,
+.mist-alchemy-hub td {
+	padding: 0.25rem 0.4rem;
+	text-align: center;
+}
+
+.mist-alchemy-hub tbody th {
+	text-align: left;
+	font-weight: normal;
+	white-space: nowrap;
+}
+
+.mist-alchemy-hub tbody th img {
+	width: 28px;
+	height: 28px;
+	border: none;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+.mist-alchemy-hub tbody tr:nth-child(odd) {
+	background: rgba(127, 127, 127, 0.08);
+}
+
+.mist-alchemy-hub tr.off th,
+.mist-alchemy-hub tr.off td:not(:nth-child(2)) {
+	opacity: 0.5;
+}
+
+.mist-alchemy-hub .buttons a {
+	margin: 0 0.25rem;
+}
+

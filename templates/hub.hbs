@@ -1,0 +1,41 @@
+<div class="mist-alchemy-hub-body">
+	<div class="mist-alchemy-hub-top">
+		<p class="hint">{{localize "MIST_ALCHEMY.Hub.Hint"}}</p>
+		<button type="button" data-action="openBook"><i class="fa-solid fa-book-skull" inert></i> {{localize "MIST_ALCHEMY.Actor.OpenBook"}}</button>
+	</div>
+	{{#if characters.length}}
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th data-tooltip="{{localize "MIST_ALCHEMY.Actor.Enabled"}}"><i class="fa-solid fa-flask" inert></i></th>
+					<th>{{localize "MIST_ALCHEMY.Hub.Recipes"}}</th>
+					<th>{{localize "MIST_ALCHEMY.Hub.Projects"}}</th>
+					<th>{{localize "MIST_ALCHEMY.Hub.Recognised"}}</th>
+					{{#if learn}}<th>{{localize "MIST_ALCHEMY.Hub.Learn"}}</th>{{/if}}
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each characters as |character|}}
+					<tr data-actor-id="{{character.id}}" class="{{#unless character.enabled}}off{{/unless}}">
+						<th><img src="{{character.img}}" alt=""> {{character.name}}</th>
+						<td><input type="checkbox" data-enable="{{character.id}}" {{#if character.enabled}}checked{{/if}} data-tooltip="{{localize "MIST_ALCHEMY.Actor.Enabled"}}"></td>
+						<td>{{character.known}} / {{../total}}</td>
+						<td>{{character.projects}}</td>
+						<td>{{character.recognised}}</td>
+						{{#if ../learn}}<td>{{character.learn}}</td>{{/if}}
+						<td class="buttons">
+							<a data-action="openSettings" data-tooltip="{{localize "MIST_ALCHEMY.Controls.Settings"}}"><i class="fa-solid fa-gear" inert></i></a>
+							<a data-action="openCraft" data-tooltip="{{localize "MIST_ALCHEMY.Actor.OpenCraft"}}"><i class="fa-solid fa-flask-vial" inert></i></a>
+							{{#if ../learn}}<a data-action="openLearn" data-tooltip="{{localize "MIST_ALCHEMY.Hub.LearnButton"}}"><i class="fa-solid fa-book-open-reader" inert></i></a>{{/if}}
+							<a data-action="openRecognised" data-tooltip="{{localize "MIST_ALCHEMY.Actor.Recognised"}}"><i class="fa-solid fa-eye" inert></i></a>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	{{else}}
+		<p class="hint">{{localize "MIST_ALCHEMY.Hub.NoCharacters"}}</p>
+	{{/if}}
+</div>

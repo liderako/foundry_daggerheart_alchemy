@@ -1,0 +1,59 @@
+<div class="mist-alchemy-book-body">
+	<nav class="mist-alchemy-tabs">
+		<a data-action="switchTab" data-tab="recipes" class="{{#if (eq tab "recipes")}}active{{/if}}"><i class="fa-solid fa-scroll" inert></i> {{localize "MIST_ALCHEMY.Book.Recipes"}}</a>
+		<a data-action="switchTab" data-tab="materials" class="{{#if (eq tab "materials")}}active{{/if}}"><i class="fa-solid fa-mortar-pestle" inert></i> {{localize "MIST_ALCHEMY.Book.Materials"}}</a>
+	</nav>
+
+	{{#if (eq tab "recipes")}}
+		<div class="mist-alchemy-dropzone" data-drop="recipe">
+			<i class="fa-solid fa-flask" inert></i> {{localize "MIST_ALCHEMY.Book.DropPotion"}}
+		</div>
+		{{#if recipes.length}}
+			<ul class="mist-alchemy-recipe-list">
+				{{#each recipes as |recipe|}}
+					<li data-recipe-id="{{recipe.id}}">
+						<img src="{{recipe.img}}" alt="">
+						<div class="info">
+							<div class="name">{{recipe.name}} <span class="dc">{{recipe.rarityLabel}} · {{recipe.difficulty}}</span></div>
+							<div class="hint">{{recipe.requirement}}</div>
+							{{#if recipe.knownBy}}<div class="hint"><i class="fa-solid fa-user" inert></i> {{recipe.knownBy}}</div>{{/if}}
+						</div>
+						<a data-action="edit" data-tooltip="{{localize "MIST_ALCHEMY.Book.Edit"}}"><i class="fa-solid fa-pen" inert></i></a>
+						<a data-action="remove" data-tooltip="{{localize "MIST_ALCHEMY.Book.Remove"}}"><i class="fa-solid fa-trash" inert></i></a>
+					</li>
+				{{/each}}
+			</ul>
+		{{else}}
+			<p class="hint">{{localize "MIST_ALCHEMY.Book.Empty"}}</p>
+		{{/if}}
+	{{else}}
+		<p class="hint">{{localize "MIST_ALCHEMY.Book.MaterialsHint"}}</p>
+		<div class="mist-alchemy-materials">
+			<section>
+				<h3>{{localize "MIST_ALCHEMY.Book.IngredientList"}}</h3>
+				<div class="mist-alchemy-dropzone" data-drop="ingredients">{{localize "MIST_ALCHEMY.Book.DropIngredient"}}</div>
+				<ul>
+					{{#each ingredients as |entry index|}}
+						<li data-kind="ingredients" data-index="{{index}}">
+							<img src="{{entry.img}}" alt=""><span class="name">{{entry.name}}</span>
+							<a data-action="removeMaterial" data-tooltip="{{localize "MIST_ALCHEMY.Book.Remove"}}"><i class="fa-solid fa-xmark" inert></i></a>
+						</li>
+					{{/each}}
+				</ul>
+			</section>
+			<section>
+				<h3>{{localize "MIST_ALCHEMY.Book.VesselList"}}</h3>
+				<div class="mist-alchemy-dropzone" data-drop="vessels">{{localize "MIST_ALCHEMY.Book.DropVessel"}}</div>
+				<ul>
+					{{#each vessels as |entry index|}}
+						<li data-kind="vessels" data-index="{{index}}">
+							<img src="{{entry.img}}" alt=""><span class="name">{{entry.name}}</span>
+							<a data-action="toggleAlcohol" class="mist-alchemy-alcohol {{#if entry.alcohol}}active{{/if}}" data-tooltip="{{#if entry.alcohol}}{{localize "MIST_ALCHEMY.Book.IsAlcohol"}}{{else}}{{localize "MIST_ALCHEMY.Book.NotAlcohol"}}{{/if}}"><i class="fa-solid fa-wine-glass" inert></i></a>
+							<a data-action="removeMaterial" data-tooltip="{{localize "MIST_ALCHEMY.Book.Remove"}}"><i class="fa-solid fa-xmark" inert></i></a>
+						</li>
+					{{/each}}
+				</ul>
+			</section>
+		</div>
+	{{/if}}
+</div>

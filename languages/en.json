@@ -1,0 +1,249 @@
+{
+	"MIST_ALCHEMY": {
+		"Settings": {
+			"Trait": {
+				"Name": "Brewing trait",
+				"Hint": "The trait of the action roll a character makes to brew a potion."
+			},
+			"Book": {
+				"Name": "Recipe book",
+				"Label": "Open the recipe book",
+				"Hint": "Potion recipes, and which items count as alchemy ingredients and vessels."
+			}
+		},
+		"Rarity": {
+			"common": "Common",
+			"uncommon": "Uncommon",
+			"rare": "Rare",
+			"legendary": "Legendary",
+			"custom": "Custom difficulty"
+		},
+		"Controls": {
+			"Craft": "Alchemy",
+			"Settings": "Alchemy settings",
+			"MarkIngredient": "Alchemy: mark as an ingredient",
+			"UnmarkIngredient": "Alchemy: ingredient (click to unmark)",
+			"MarkVessel": "Alchemy: mark as a vessel",
+			"UnmarkVessel": "Alchemy: vessel (click to unmark)"
+		},
+		"Craft": {
+			"Title": "Alchemy: {actor}",
+			"NoActor": "Select a token or assign a character to brew",
+			"Disabled": "This character cannot brew potions",
+			"DisabledGM": "Alchemy is off for this character: players do not see this window. Turn it on in the alchemy settings.",
+			"Recipes": "Recipes",
+			"DifficultyTooltip": "Difficulty",
+			"NoRecipes": "The character knows no recipes yet.",
+			"Check": "{trait} roll, difficulty {difficulty}",
+			"Enhanced": "On a critical: {name}",
+			"AnyIngredient": "Any alchemy ingredient",
+			"Ingredients": "Ingredients {count}/{total}",
+			"ClickToRemove": "Click to take it out",
+			"DropIngredients": "Drag ingredients here from the sheet or the list on the right; you choose how many (Shift: all that fit)",
+			"Vessel": "Vessel",
+			"DropVessel": "Drag a vial or a bottle here",
+			"Clear": "Empty",
+			"Brew": "Brew (difficulty {difficulty})",
+			"PickRecipe": "Pick a recipe on the left.",
+			"YourIngredients": "Ingredients",
+			"Add": "Put in",
+			"NoIngredients": "No alchemy ingredients in the inventory.",
+			"YourVessels": "Vessels",
+			"UseVessel": "Use as the vessel",
+			"NoVessels": "No vials or bottles in the inventory.",
+			"NotReady": "Put in all the ingredients and a vessel first",
+			"ItemsGone": "Some of the ingredients or the vessel are no longer in the inventory",
+			"RollTitle": "Brewing: {potion}",
+			"RollHeader": "Alchemy: {actor}",
+			"NotOwnItem": "Only this character's own items can go into the potion",
+			"NotVessel": "{name} is not a vessel",
+			"NotIngredient": "{name} is not an alchemy ingredient",
+			"DoesNotFit": "{name}: the recipe needs no more of it",
+			"NoneLeft": "{name}: none left",
+			"Failed": "Brewing failed, see the console",
+			"GMRecipesHint": "GM: the whole book is shown. Tick the recipes this character knows (known: {count}); the player sees only those.",
+			"Teach": "The character knows this recipe",
+			"Forget": "The character forgets this recipe",
+			"BookEmpty": "The recipe book is empty: add recipes there (module settings).",
+			"OtherItems": "Other items (GM)",
+			"OtherItemsHint": "Mark an item as an alchemy ingredient or a vessel. The mark goes by name, for every character.",
+			"MarkTitle": "Alchemy",
+			"MarkQuestion": "{name} is not marked yet. What is it?",
+			"MarkIngredient": "Alchemy ingredient",
+			"MarkVessel": "Vessel",
+			"NoEquipmentModule": "The Mist Age - Equipment is off: the variant potion cannot be hidden",
+			"MixActive": "Mixed with {vessel}: its own outcome table ({potion})",
+			"HasMix": "This alcohol changes the result of the selected recipe",
+			"HowManyTitle": "Put in",
+			"HowMany": "How many {name} to put in? (1–{max})",
+			"AddHint": "Put in (Shift: all that fit)",
+			"AlcoholBlocked": "{recipe} cannot be mixed with alcohol: {name} does not fit",
+			"AlcoholBlockedHint": "This recipe cannot be mixed with alcohol",
+			"MixActivePlayer": "Mixed with {vessel}: the result is unknown until you learn it"
+		},
+		"Chat": {
+			"Difficulty": "Difficulty {difficulty}",
+			"Spent": "Spent: {items}",
+			"EnhancedMissing": "The recipe has no enhanced version: the GM decides how this potion is stronger.",
+			"HiddenForGM": "{actor} got {real}, hidden as \"{shown}\". Identify it in the item's settings when the time comes.",
+			"Mixed": "Mixed with {vessel}",
+			"OnUse": "{item}: {changes}",
+			"Recognised": "{actor} recognises what came out: {name}."
+		},
+		"Outcome": {
+			"critical": {
+				"Label": "Critical success",
+				"Text": "The potion comes out enhanced."
+			},
+			"successHope": {
+				"Label": "Success with Hope",
+				"Text": "The potion is ready."
+			},
+			"successFear": {
+				"Label": "Success with Fear",
+				"Text": "The potion is ready."
+			},
+			"failureHope": {
+				"Label": "Failure with Hope",
+				"Text": "The potion comes out, but with side effects. It may still be useful."
+			},
+			"failureFear": {
+				"Label": "Failure with Fear",
+				"Text": "The potion comes out, but with negative consequences of the GM's choosing."
+			}
+		},
+		"Book": {
+			"Title": "Recipe Book",
+			"Recipes": "Recipes",
+			"Materials": "Ingredients and vessels",
+			"DropPotion": "Drop a potion item here to add its recipe",
+			"Edit": "Edit",
+			"Remove": "Remove",
+			"Empty": "No recipes yet.",
+			"AnyCount": "any ingredients ×{count}",
+			"NoIngredients": "no ingredients",
+			"RemoveTitle": "Remove Recipe",
+			"RemoveConfirm": "Remove the recipe \"{name}\"? Characters who know it will forget it.",
+			"MaterialsHint": "Items are matched by name, so copies already in the characters' inventories count too.",
+			"IngredientList": "Alchemy ingredients",
+			"DropIngredient": "Drop an ingredient item here",
+			"VesselList": "Vessels",
+			"DropVessel": "Drop a vial, a bottle of alcohol and so on",
+			"Added": "Added: {count}",
+			"IsAlcohol": "Alcohol (click to unmark)",
+			"NotAlcohol": "Not alcohol (click to mark as alcohol)"
+		},
+		"Editor": {
+			"Title": "Recipe: {name}",
+			"Result": "Potion",
+			"DropToReplace": "Drop another item to replace",
+			"Enhanced": "Enhanced version",
+			"EnhancedHint": "Drop a potion given on a critical success",
+			"Rarity": "Rarity",
+			"Difficulty": "Difficulty",
+			"Ingredients": "Ingredients (total {total})",
+			"AnyIngredients": "Any alchemy ingredients",
+			"NamedHint": "Particular ingredients the recipe needs, besides the ones of any kind:",
+			"DropNamed": "Drop an ingredient here (again to need one more)",
+			"Variants": "Outcome variants",
+			"VariantsHint": "Optional. A variant is given hidden: unidentified, under the recipe potion's name and picture, with its description and features concealed until the GM identifies it (the Equipment module's mystery items). An outcome without a variant gives the recipe potion.",
+			"Slot": {
+				"result": {
+					"Label": "Potion by the recipe",
+					"Hint": "Success with Hope; also any outcome without its own variant"
+				},
+				"enhanced": {
+					"Label": "Critical success",
+					"Hint": "The enhanced potion"
+				},
+				"successFear": {
+					"Label": "Success with Fear",
+					"Hint": "A slightly different effect"
+				},
+				"failureHope": {
+					"Label": "Failure with Hope",
+					"Hint": "Flawed, may still be useful"
+				},
+				"failureFear": {
+					"Label": "Failure with Fear",
+					"Hint": "Gone wrong"
+				}
+			},
+			"Mixes": "Mixing with alcohol",
+			"MixesHint": "Drop a bottle of alcohol to give this recipe its own outcome table when that alcohol is the vessel. An empty slot gives the recipe potion. On alcohol every outcome comes out hidden, until the character knows that combination.",
+			"MixResultHint": "Success with Hope on this alcohol",
+			"RemoveMix": "Remove this alcohol's table",
+			"DropMix": "Drop a bottle of alcohol here",
+			"BlockAlcohol": "Forbid mixing with alcohol",
+			"BlockAlcoholHint": "This recipe refuses vessels marked as alcohol in the materials: only a vial and other non-alcohol vessels can be used.",
+			"Research": "Research",
+			"ResearchHint": "Learning this recipe from a sample. Leave empty to go by rarity (the placeholder shows that value).",
+			"ResearchDifficulty": "Research difficulty",
+			"ResearchProgress": "Starting counter"
+		},
+		"Actor": {
+			"Title": "Alchemy: {actor}",
+			"Enabled": "Can brew potions",
+			"EnabledHint": "Players see the Alchemy entry in the sheet's menu only when this is on.",
+			"Known": "Known recipes",
+			"NoRecipes": "The recipe book is empty.",
+			"OpenBook": "Recipe book",
+			"OpenCraft": "Alchemy window",
+			"Recognised": "Recognised results",
+			"RecognisedHint": "Hidden by-products of brewing the character already knows: for each recipe, plain and on each alcohol, which result comes out. A ticked combination comes out identified. They cannot be brewed on purpose.",
+			"NoOutcomes": "The recipes have no outcome variants yet.",
+			"RecognisedCount": "Known: {have} of {total}",
+			"RecognisedOpen": "Set up",
+			"Projects": "Research projects",
+			"NoProjects": "No research started.",
+			"RemoveProject": "Drop the project"
+		},
+		"Drop": {
+			"NotItem": "Drop an item or a folder of items"
+		},
+		"Resource": {
+			"hope": "Hope",
+			"stress": "Stress",
+			"hitPoints": "HP",
+			"fear": "Fear"
+		},
+		"Recognised": {
+			"Title": "Recognised results: {actor}",
+			"Plain": "Without alcohol",
+			"Search": "Search recipes",
+			"Learnt": "The character knows this recipe",
+			"ToggleRow": "Tick or untick the whole row"
+		},
+		"Research": {
+			"TabBrew": "Brewing",
+			"TabResearch": "Research",
+			"Projects": "Research",
+			"ListHint": "Potions you have a sample of, and projects you have started.",
+			"Nothing": "Nothing to research: get a sample of an unknown potion first.",
+			"Pick": "Pick a potion on the left.",
+			"ProgressTooltip": "Counter",
+			"Progress": "Counter {counter} / {needed}",
+			"GainHint": "The counter counts down to 0: critical −3, success with Hope −2, success with Fear −1, failure with Hope 0, failure with Fear +1",
+			"Sample": "A sample of {name} (first attempt only, it is spent)",
+			"Hint": "Each attempt spends the ingredients. Drag them here or click them on the right.",
+			"Attempt": "Study (difficulty {difficulty})",
+			"RollTitle": "Studying: {potion}",
+			"ChatTitle": "Research: {name}",
+			"Learnt": "{actor} has learnt the recipe of {name}!",
+			"NotReady": "Put in the ingredients first",
+			"NeedSample": "The first attempt needs a sample of {name} in the inventory",
+			"Failed": "The research attempt failed, see the console"
+		},
+		"Hub": {
+			"Title": "Alchemy: characters",
+			"Hint": "Every player character's alchemy at a glance; the buttons open their settings, alchemy window and recognised results.",
+			"Recipes": "Recipes",
+			"Projects": "Research",
+			"Recognised": "Recognised",
+			"NoCharacters": "No player characters yet.",
+			"Button": "Alchemy",
+			"Learn": "Projects",
+			"LearnButton": "Learn projects"
+		}
+	}
+}

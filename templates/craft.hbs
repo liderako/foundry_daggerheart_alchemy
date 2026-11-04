@@ -1,0 +1,223 @@
+<div class="mist-alchemy-craft-body {{#if busy}}busy{{/if}}">
+	{{#unless enabled}}
+		<p class="mist-alchemy-warning"><i class="fa-solid fa-triangle-exclamation" inert></i> {{localize "MIST_ALCHEMY.Craft.DisabledGM"}}</p>
+	{{/unless}}
+	<nav class="mist-alchemy-tabs">
+		<a data-action="switchTab" data-tab="brew" class="{{#if (eq tab "brew")}}active{{/if}}"><i class="fa-solid fa-flask-vial" inert></i> {{localize "MIST_ALCHEMY.Research.TabBrew"}}</a>
+		<a data-action="switchTab" data-tab="research" class="{{#if (eq tab "research")}}active{{/if}}"><i class="fa-solid fa-magnifying-glass" inert></i> {{localize "MIST_ALCHEMY.Research.TabResearch"}}</a>
+	</nav>
+	<div class="mist-alchemy-columns">
+		{{#if (eq tab "brew")}}
+		<section class="mist-alchemy-recipes">
+			<h3>{{localize "MIST_ALCHEMY.Craft.Recipes"}}</h3>
+			{{#if isGM}}
+				<p class="hint">{{localize "MIST_ALCHEMY.Craft.GMRecipesHint" count=knownCount}}</p>
+			{{/if}}
+			{{#if recipes.length}}
+				<ul>
+					{{#each recipes as |recipe|}}
+						<li class="{{#if recipe.selected}}selected{{/if}} {{#unless recipe.known}}unknown{{/unless}}" data-recipe-id="{{recipe.id}}" data-action="selectRecipe">
+							{{#if ../isGM}}
+								<a class="known-toggle" data-action="toggleKnown" data-tooltip="{{#if recipe.known}}{{localize "MIST_ALCHEMY.Craft.Forget"}}{{else}}{{localize "MIST_ALCHEMY.Craft.Teach"}}{{/if}}">
+									<i class="{{#if recipe.known}}fa-solid fa-square-check{{else}}fa-regular fa-square{{/if}}" inert></i>
+								</a>
+							{{/if}}
+							<img src="{{recipe.img}}" alt="">
+							<span class="name">{{recipe.name}}</span>
+							<span class="dc" data-tooltip="{{localize "MIST_ALCHEMY.Craft.DifficultyTooltip"}}">{{recipe.difficulty}}</span>
+						</li>
+					{{/each}}
+				</ul>
+			{{else}}
+				<p class="hint">{{#if isGM}}{{localize "MIST_ALCHEMY.Craft.BookEmpty"}}{{else}}{{localize "MIST_ALCHEMY.Craft.NoRecipes"}}{{/if}}</p>
+			{{/if}}
+		</section>
+
+		<section class="mist-alchemy-table">
+			{{#if recipe}}
+				<header class="mist-alchemy-target">
+					<img src="{{recipe.img}}" alt="">
+					<div>
+						<h3>{{recipe.name}}</h3>
+						<span>{{localize "MIST_ALCHEMY.Craft.Check" trait=traitLabel difficulty=recipe.difficulty}}</span>
+						{{#if recipe.enhancedName}}
+							<span class="hint">{{localize "MIST_ALCHEMY.Craft.Enhanced" name=recipe.enhancedName}}</span>
+						{{/if}}
+					</div>
+				</header>
+
+				<ul class="mist-alchemy-needs">
+					{{#each recipe.named as |entry|}}
+						<li class="{{#if entry.done}}done{{/if}}"><img src="{{entry.img}}" alt=""> {{entry.name}} <b>{{entry.have}}/{{entry.quantity}}</b></li>
+					{{/each}}
+					{{#if recipe.any}}
+						<li class="{{#if recipe.anyDone}}done{{/if}}"><i class="fa-solid fa-mortar-pestle" inert></i> {{localize "MIST_ALCHEMY.Craft.AnyIngredient"}} <b>{{recipe.anyHave}}/{{recipe.any}}</b></li>
+					{{/if}}
+				</ul>
+
+				<div class="mist-alchemy-cauldron" data-drop="ingredient">
+					<div class="label">{{localize "MIST_ALCHEMY.Craft.Ingredients" count=recipe.count total=recipe.total}}</div>
+					<div class="slots">
+						{{#each recipe.placedItems as |item|}}
+							<a class="slot filled" data-item-id="{{item.id}}" data-action="unplace" data-tooltip="{{item.name}}<br>{{localize "MIST_ALCHEMY.Craft.ClickToRemove"}}">
+								<img src="{{item.img}}" alt="">
+								{{#if (gt item.units 1)}}<span class="count">{{item.units}}</span>{{/if}}
+							</a>
+						{{/each}}
+						{{#each recipe.emptySlots}}
+							<span class="slot empty"><i class="fa-solid fa-plus" inert></i></span>
+						{{/each}}
+					</div>
+					<p class="hint">{{localize "MIST_ALCHEMY.Craft.DropIngredients"}}</p>
+				</div>
+
+				<div class="mist-alchemy-vessel" data-drop="vessel">
+					<div class="label">{{localize "MIST_ALCHEMY.Craft.Vessel"}}</div>
+					{{#if recipe.vessel}}
+						<a class="slot filled" data-action="clearVessel" data-tooltip="{{recipe.vessel.name}}<br>{{localize "MIST_ALCHEMY.Craft.ClickToRemove"}}">
+							<img src="{{recipe.vessel.img}}" alt="">
+						</a>
+						<span>{{recipe.vessel.name}}</span>
+						{{#if recipe.mix}}
+							<span class="mist-alchemy-mix-note"><i class="fa-solid fa-wine-glass" inert></i> {{#if recipe.mix.resultName}}{{localize "MIST_ALCHEMY.Craft.MixActive" vessel=recipe.mix.vessel potion=recipe.mix.resultName}}{{else}}{{localize "MIST_ALCHEMY.Craft.MixActivePlayer" vessel=recipe.mix.vessel}}{{/if}}</span>
+						{{/if}}
+					{{else}}
+						<span class="slot empty"><i class="fa-solid fa-wine-bottle" inert></i></span>
+						<span class="hint">{{localize "MIST_ALCHEMY.Craft.DropVessel"}}</span>
+					{{/if}}
+				</div>
+
+				<footer class="mist-alchemy-actions">
+					<button type="button" data-action="clearAll" {{#if busy}}disabled{{/if}}><i class="fa-solid fa-rotate-left" inert></i> {{localize "MIST_ALCHEMY.Craft.Clear"}}</button>
+					<button type="button" class="brew" data-action="brew" {{#unless recipe.ready}}disabled{{/unless}} {{#if busy}}disabled{{/if}}>
+						<i class="fa-solid fa-flask-vial" inert></i> {{localize "MIST_ALCHEMY.Craft.Brew" difficulty=recipe.difficulty}}
+					</button>
+				</footer>
+			{{else}}
+				<p class="hint">{{localize "MIST_ALCHEMY.Craft.PickRecipe"}}</p>
+			{{/if}}
+		</section>
+		{{else}}
+		<section class="mist-alchemy-recipes">
+			<h3>{{localize "MIST_ALCHEMY.Research.Projects"}}</h3>
+			<p class="hint">{{localize "MIST_ALCHEMY.Research.ListHint"}}</p>
+			{{#if research.list.length}}
+				<ul>
+					{{#each research.list as |entry|}}
+						<li class="{{#if entry.selected}}selected{{/if}}" data-recipe-id="{{entry.id}}" data-action="selectResearch">
+							<img src="{{entry.img}}" alt="">
+							<span class="name">{{entry.name}}</span>
+							<span class="dc" data-tooltip="{{localize "MIST_ALCHEMY.Research.ProgressTooltip"}}">{{#if entry.started}}{{entry.counter}}/{{entry.needed}}{{else}}<i class="fa-solid fa-flask" inert></i>{{/if}}</span>
+						</li>
+					{{/each}}
+				</ul>
+			{{else}}
+				<p class="hint">{{localize "MIST_ALCHEMY.Research.Nothing"}}</p>
+			{{/if}}
+		</section>
+
+		<section class="mist-alchemy-table">
+			{{#if research.selected}}
+				<header class="mist-alchemy-target">
+					<img src="{{research.selected.img}}" alt="">
+					<div>
+						<h3>{{research.selected.name}}</h3>
+						<span>{{localize "MIST_ALCHEMY.Craft.Check" trait=traitLabel difficulty=research.selected.difficulty}}</span>
+					</div>
+				</header>
+
+				<div class="mist-alchemy-progress" data-tooltip="{{localize "MIST_ALCHEMY.Research.GainHint"}}">
+					<div class="bar"><span style="width: {{research.selected.percent}}%"></span></div>
+					<b>{{localize "MIST_ALCHEMY.Research.Progress" counter=research.selected.counter needed=research.selected.needed}}</b>
+				</div>
+
+				<ul class="mist-alchemy-needs">
+					{{#unless research.selected.started}}
+						<li class="{{#if research.selected.sample}}done{{/if}}">
+							{{#if research.selected.sample}}<img src="{{research.selected.sample.img}}" alt="">{{else}}<i class="fa-solid fa-flask" inert></i>{{/if}}
+							{{localize "MIST_ALCHEMY.Research.Sample" name=research.selected.name}}
+						</li>
+					{{/unless}}
+					<li class="{{#if research.selected.anyDone}}done{{/if}}"><i class="fa-solid fa-mortar-pestle" inert></i> {{localize "MIST_ALCHEMY.Craft.AnyIngredient"}} <b>{{research.selected.anyHave}}/{{research.selected.any}}</b></li>
+				</ul>
+
+				<div class="mist-alchemy-cauldron" data-drop="ingredient">
+					<div class="label">{{localize "MIST_ALCHEMY.Craft.Ingredients" count=research.selected.count total=research.selected.total}}</div>
+					<div class="slots">
+						{{#each research.selected.placedItems as |item|}}
+							<a class="slot filled" data-item-id="{{item.id}}" data-action="unplace" data-tooltip="{{item.name}}<br>{{localize "MIST_ALCHEMY.Craft.ClickToRemove"}}">
+								<img src="{{item.img}}" alt="">
+								{{#if (gt item.units 1)}}<span class="count">{{item.units}}</span>{{/if}}
+							</a>
+						{{/each}}
+						{{#each research.selected.emptySlots}}
+							<span class="slot empty"><i class="fa-solid fa-plus" inert></i></span>
+						{{/each}}
+					</div>
+					<p class="hint">{{localize "MIST_ALCHEMY.Research.Hint"}}</p>
+				</div>
+
+				<footer class="mist-alchemy-actions">
+					<button type="button" data-action="clearAll" {{#if busy}}disabled{{/if}}><i class="fa-solid fa-rotate-left" inert></i> {{localize "MIST_ALCHEMY.Craft.Clear"}}</button>
+					<button type="button" class="brew" data-action="research" {{#unless research.selected.ready}}disabled{{/unless}} {{#if busy}}disabled{{/if}}>
+						<i class="fa-solid fa-magnifying-glass" inert></i> {{localize "MIST_ALCHEMY.Research.Attempt" difficulty=research.selected.difficulty}}
+					</button>
+				</footer>
+			{{else}}
+				<p class="hint">{{localize "MIST_ALCHEMY.Research.Pick"}}</p>
+			{{/if}}
+		</section>
+		{{/if}}
+
+		<section class="mist-alchemy-inventory">
+			<h3>{{localize "MIST_ALCHEMY.Craft.YourIngredients"}}</h3>
+			{{#if ingredients.length}}
+				<ul>
+					{{#each ingredients as |item|}}
+						<li data-item-id="{{item.id}}" data-drag-uuid="{{item.uuid}}" class="{{#unless item.canPlace}}inactive{{/unless}}">
+							<img src="{{item.img}}" alt="">
+							<span class="name">{{item.name}}</span>
+							<span class="qty">{{item.left}}</span>
+							{{#if item.canPlace}}<a data-action="place" data-tooltip="{{localize "MIST_ALCHEMY.Craft.AddHint"}}"><i class="fa-solid fa-arrow-left" inert></i></a>{{/if}}
+						</li>
+					{{/each}}
+				</ul>
+			{{else}}
+				<p class="hint">{{localize "MIST_ALCHEMY.Craft.NoIngredients"}}</p>
+			{{/if}}
+			{{#if (eq tab "brew")}}
+			<h3>{{localize "MIST_ALCHEMY.Craft.YourVessels"}}</h3>
+			{{#if vessels.length}}
+				<ul>
+					{{#each vessels as |item|}}
+						<li data-item-id="{{item.id}}" data-drag-uuid="{{item.uuid}}" class="{{#unless item.canSetVessel}}inactive{{/unless}}" {{#if item.blocked}}data-tooltip="{{localize "MIST_ALCHEMY.Craft.AlcoholBlockedHint"}}"{{/if}}>
+							<img src="{{item.img}}" alt="">
+							<span class="name">{{item.name}}</span>
+							{{#if item.blocked}}<i class="fa-solid fa-ban" inert></i>{{/if}}
+							{{#if item.hasMix}}<i class="fa-solid fa-wine-glass" data-tooltip="{{localize "MIST_ALCHEMY.Craft.HasMix"}}" inert></i>{{/if}}
+							<span class="qty">{{item.left}}</span>
+							{{#if item.canSetVessel}}<a data-action="setVessel" data-tooltip="{{localize "MIST_ALCHEMY.Craft.UseVessel"}}"><i class="fa-solid fa-arrow-left" inert></i></a>{{/if}}
+						</li>
+					{{/each}}
+				</ul>
+			{{else}}
+				<p class="hint">{{localize "MIST_ALCHEMY.Craft.NoVessels"}}</p>
+			{{/if}}
+			{{/if}}
+			{{#if isGM}}
+				<h3>{{localize "MIST_ALCHEMY.Craft.OtherItems"}}</h3>
+				<p class="hint">{{localize "MIST_ALCHEMY.Craft.OtherItemsHint"}}</p>
+				<ul>
+					{{#each others as |item|}}
+						<li data-item-id="{{item.id}}" data-drag-uuid="{{item.uuid}}">
+							<img src="{{item.img}}" alt="">
+							<span class="name">{{item.name}}</span>
+							<a data-action="markIngredient" data-tooltip="{{localize "MIST_ALCHEMY.Craft.MarkIngredient"}}"><i class="fa-solid fa-mortar-pestle" inert></i></a>
+							<a data-action="markVessel" data-tooltip="{{localize "MIST_ALCHEMY.Craft.MarkVessel"}}"><i class="fa-solid fa-wine-bottle" inert></i></a>
+						</li>
+					{{/each}}
+				</ul>
+			{{/if}}
+		</section>
+	</div>
+</div>
