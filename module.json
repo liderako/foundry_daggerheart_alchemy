@@ -18,6 +18,20 @@
 				"id": "daggerheart",
 				"type": "system"
 			}
+		],
+		"recommends": [
+			{
+				"id": "mist-age-equipment",
+				"type": "module",
+				"manifest": "https://github.com/liderako/foundry_daggerheart_equipment/releases/latest/download/module.json",
+				"reason": "Unidentified potions: a brewed potion can stay a mystery until the character recognises it."
+			},
+			{
+				"id": "mist-age-learn-projects",
+				"type": "module",
+				"manifest": "https://github.com/liderako/foundry_daggerheart_learn_projects/releases/latest/download/module.json",
+				"reason": "The GM's alchemy panel shows each character's learn projects next to their recipes."
+			}
 		]
 	},
 	"esmodules": [
@@ -43,7 +57,7 @@
 			"path": "languages/uk.json"
 		}
 	],
-	"url": "",
-	"manifest": "",
+	"url": "https://github.com/liderako/foundry_daggerheart_alchemy",
+	"manifest": "https://github.com/liderako/foundry_daggerheart_alchemy/releases/latest/download/module.json",
 	"download": ""
 }
