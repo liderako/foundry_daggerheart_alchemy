@@ -4,6 +4,7 @@ import { CraftWindow } from "./craft-window.js";
 import { RecipeBook, RecipeEditor } from "./recipe-book.js";
 import { registerOnUse } from "./on-use.js";
 import { registerLearnByDrinking } from "./learn-by-drinking.js";
+import { registerPartySetting } from "./party-config.js";
 import { AlchemyHub } from "./gm-hub.js";
 
 /** The alchemy entries in a character sheet's header menu: brewing for whoever can, the settings for the GM. */
@@ -70,6 +71,7 @@ Hooks.once("init", () => {
 	registerSettings();
 	registerOnUse();
 	registerLearnByDrinking();
+	registerPartySetting();
 	game.settings.registerMenu(MODULE_ID, "recipeBook", {
 		name: "MIST_ALCHEMY.Settings.Book.Name",
 		label: "MIST_ALCHEMY.Settings.Book.Label",

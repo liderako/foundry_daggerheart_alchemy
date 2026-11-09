@@ -659,3 +659,34 @@
 	margin: 0 0.25rem;
 }
 
+
+/* Shared potion knowledge: a fieldset per group, one row per character. */
+.mist-alchemy-party-group legend {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.mist-alchemy-party-group legend input {
+	width: 14rem;
+}
+.mist-alchemy-party-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding: 0.5rem;
+}
+.mist-alchemy-party-row {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.mist-alchemy-party-row img {
+	width: 28px;
+	height: 28px;
+	border: none;
+	object-fit: cover;
+	border-radius: 4px;
+}
+.mist-alchemy-party-row span {
+	flex: 1;
+}

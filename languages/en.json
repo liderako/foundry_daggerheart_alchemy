@@ -9,6 +9,11 @@
 				"Name": "Recipe book",
 				"Label": "Open the recipe book",
 				"Hint": "Potion recipes, and which items count as alchemy ingredients and vessels."
+			},
+			"Party": {
+				"Name": "Shared potion knowledge",
+				"Label": "Set up groups",
+				"Hint": "Only for learning potions by drinking: groups of characters who share it, such as a campaign party and a one-shot party. When a member drinks a hidden potion, the other members with alchemy learn it too."
 			}
 		},
 		"Rarity": {
@@ -89,7 +94,8 @@
 			"Mixed": "Mixed with {vessel}",
 			"OnUse": "{item}: {changes}",
 			"Recognised": "{actor} recognises what came out: {name}.",
-			"LearntByDrinking": "{actor} drank it and now knows what it does: {name}. Brewed the same way again, it comes out identified."
+			"LearntByDrinking": "{actor} drank it and now knows what it does: {name}. Brewed the same way again, it comes out identified.",
+			"LearntFromParty": "{actors} saw {actor} drink it and now know it too: {name}."
 		},
 		"Outcome": {
 			"critical": {
@@ -249,6 +255,17 @@
 		"Free": {
 			"Brew": "brewing «{name}»",
 			"Research": "studying the recipe «{name}»"
+		},
+		"Party": {
+			"Title": "Shared potion knowledge",
+			"Hint": "Each group is characters who share what they learn about potions. When a member drinks a potion they did not know, every other member with alchemy (the flask) learns it too. A character may be in several groups. Nothing else uses these groups.",
+			"DefaultName": "Party",
+			"NewName": "New group",
+			"NamePlaceholder": "Group name",
+			"Add": "Add a group",
+			"Delete": "Delete the group",
+			"DeleteConfirm": "Delete the group \"{name}\"? What its characters already learnt stays.",
+			"Empty": "No groups yet: drinking teaches only the drinker."
 		}
 	}
 }
