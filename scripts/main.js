@@ -3,6 +3,7 @@ import { ActorConfig } from "./actor-config.js";
 import { CraftWindow } from "./craft-window.js";
 import { RecipeBook, RecipeEditor } from "./recipe-book.js";
 import { registerOnUse } from "./on-use.js";
+import { registerLearnByDrinking } from "./learn-by-drinking.js";
 import { AlchemyHub } from "./gm-hub.js";
 
 /** The alchemy entries in a character sheet's header menu: brewing for whoever can, the settings for the GM. */
@@ -68,6 +69,7 @@ function defaultActor() {
 Hooks.once("init", () => {
 	registerSettings();
 	registerOnUse();
+	registerLearnByDrinking();
 	game.settings.registerMenu(MODULE_ID, "recipeBook", {
 		name: "MIST_ALCHEMY.Settings.Book.Name",
 		label: "MIST_ALCHEMY.Settings.Book.Label",

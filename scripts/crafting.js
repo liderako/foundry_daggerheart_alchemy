@@ -2,7 +2,7 @@ import {
 	RESEARCH_GAIN, RESEARCH_INGREDIENTS, findSample, getProjects, getResearchDifficulty, getResearchProgress, projectCounter,
 	removeProject, setProjectCounter, setRecipeKnown
 } from "./data.js";
-import { HIDDEN_SLOTS, getDifficulty, getKnownRecipes, comboKey, getMix, getRecognised, potionKey, getQuantity, getRequirement, getTrait, isIngredient, isVessel, normalizeName, vesselAllowed } from "./data.js";
+import { HIDDEN_SLOTS, MODULE_ID, getDifficulty, getKnownRecipes, comboKey, getMix, getRecognised, potionKey, getQuantity, getRequirement, getTrait, isIngredient, isVessel, normalizeName, vesselAllowed } from "./data.js";
 
 /** Roll outcomes, in the order of the alchemy rules. */
 export const OUTCOMES = ["critical", "successHope", "successFear", "failureHope", "failureFear"];
@@ -188,7 +188,7 @@ export function potionFor(recipe, outcome, mix = null) {
  * Puts one potion into the inventory. A hidden variant arrives unidentified (the Equipment module's mystery item),
  * going by the recipe potion's name and picture, which the character may still drink (that identifies it), and never joins a stack; any other potion joins a stack of the same.
  */
-async function givePotion(actor, recipe, ref, hidden, shown) {
+async function givePotion(actor, recipe, ref, hidden, shown, combo) {
 	const data = foundry.utils.deepClone(ref.data);
 	if (!hidden) {
 		const stack = actor.items.find(existing => isStackable(existing, data));
@@ -211,6 +211,8 @@ async function givePotion(actor, recipe, ref, hidden, shown) {
 		if (data.system && "equipped" in data.system) {
 			data.system.equipped = false;
 		}
+		// The combination it came from: drinking it teaches the character that combination.
+		foundry.utils.setProperty(data, `flags.${MODULE_ID}.combo`, combo);
 	}
 	const [created] = await actor.createEmbeddedDocuments("Item", [data]);
 	return created;
@@ -309,7 +311,7 @@ export async function brew(actor, recipe, placed, vesselId) {
 	if (hidden && !game.modules.get(EQUIPMENT_ID)?.active) {
 		ui.notifications.warn("MIST_ALCHEMY.Craft.NoEquipmentModule", { localize: true });
 	}
-	const potion = await givePotion(actor, recipe, ref, hidden, shown);
+	const potion = await givePotion(actor, recipe, ref, hidden, shown, comboKey(recipe.id, mix?.id, slot));
 	await postChat(actor, recipe, outcome, potion, spent, outcome === "critical" && slot !== "enhanced", mix, recognised);
 	if (hidden) {
 		await ChatMessage.create({

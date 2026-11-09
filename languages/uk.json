@@ -88,7 +88,8 @@
 			"HiddenForGM": "{actor} отримує {real}, приховане як «{shown}». Ідентифікуйте його в налаштуваннях предмета, коли настане час.",
 			"Mixed": "Змішано з {vessel}",
 			"OnUse": "{item}: {changes}",
-			"Recognised": "{actor} впізнає, що вийшло: {name}."
+			"Recognised": "{actor} впізнає, що вийшло: {name}.",
+			"LearntByDrinking": "{actor} випиває його і тепер знає, що воно робить: {name}. Зварене так само знову, воно вийде впізнаним."
 		},
 		"Outcome": {
 			"critical": {

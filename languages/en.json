@@ -88,7 +88,8 @@
 			"HiddenForGM": "{actor} got {real}, hidden as \"{shown}\". Identify it in the item's settings when the time comes.",
 			"Mixed": "Mixed with {vessel}",
 			"OnUse": "{item}: {changes}",
-			"Recognised": "{actor} recognises what came out: {name}."
+			"Recognised": "{actor} recognises what came out: {name}.",
+			"LearntByDrinking": "{actor} drank it and now knows what it does: {name}. Brewed the same way again, it comes out identified."
 		},
 		"Outcome": {
 			"critical": {
