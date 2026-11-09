@@ -186,7 +186,7 @@ export function potionFor(recipe, outcome, mix = null) {
 
 /**
  * Puts one potion into the inventory. A hidden variant arrives unidentified (the Equipment module's mystery item),
- * going by the recipe potion's name and picture, and never joins a stack; any other potion joins a stack of the same.
+ * going by the recipe potion's name and picture, which the character may still drink (that identifies it), and never joins a stack; any other potion joins a stack of the same.
  */
 async function givePotion(actor, recipe, ref, hidden, shown) {
 	const data = foundry.utils.deepClone(ref.data);
@@ -203,6 +203,8 @@ async function givePotion(actor, recipe, ref, hidden, shown) {
 	if (hidden) {
 		foundry.utils.setProperty(data, `flags.${EQUIPMENT_ID}.mystery`, {
 			unidentified: true,
+			// The character may drink it without knowing what it is; drinking it identifies it.
+			usable: true,
 			name: shown?.name ?? recipe.result?.name ?? recipe.name,
 			img: shown?.img ?? recipe.result?.img ?? recipe.img
 		});
