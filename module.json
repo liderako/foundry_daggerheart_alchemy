@@ -31,6 +31,12 @@
 				"type": "module",
 				"manifest": "https://github.com/liderako/foundry_daggerheart_learn_projects/releases/latest/download/module.json",
 				"reason": "The GM's alchemy panel shows each character's learn projects next to their recipes."
+			},
+			{
+				"id": "mist-age-free-actions",
+				"type": "module",
+				"manifest": "https://github.com/liderako/foundry_daggerheart_free_actions/releases/latest/download/module.json",
+				"reason": "Downtime free actions: every brewing and recipe research attempt spends one."
 			}
 		]
 	},

@@ -288,6 +288,7 @@ export async function brew(actor, recipe, placed, vesselId) {
 	const costs = result.costs?.filter(cost => cost.enabled).map(cost => ({ ...cost, value: -cost.value })) ?? [];
 	result.resourceUpdates?.addResources(costs);
 	await result.resourceUpdates?.updateResources();
+	await freeActions()?.spend(actor, i18n.format("MIST_ALCHEMY.Free.Brew", { name: recipe.name }));
 
 	const outcome = outcomeOf(result.roll);
 	// The roll may have taken a while (dialog, dice animation): check again before spending.
@@ -382,6 +383,7 @@ export async function research(actor, recipe, placed) {
 	const costs = result.costs?.filter(cost => cost.enabled).map(cost => ({ ...cost, value: -cost.value })) ?? [];
 	result.resourceUpdates?.addResources(costs);
 	await result.resourceUpdates?.updateResources();
+	await freeActions()?.spend(actor, i18n.format("MIST_ALCHEMY.Free.Research", { name: recipe.name }));
 
 	const outcome = outcomeOf(result.roll);
 	if (!checkInventory(actor, use)) {
@@ -422,4 +424,16 @@ export async function research(actor, recipe, placed) {
 			</div>`
 	});
 	return outcome;
+}
+
+/** The Mist Age - Free Actions, when it is active: every downtime roll spends one free action (none at 0). */
+export function freeActions() {
+	const module = game.modules.get("mist-age-free-actions");
+	return module?.active ? module.api ?? null : null;
+}
+
+/** "Free actions: 19" for the roll buttons, or null without the module. */
+export function freeActionsLine(actor) {
+	const api = freeActions();
+	return api ? game.i18n.format("MIST_FREE.Line", { count: api.get(actor) }) : null;
 }

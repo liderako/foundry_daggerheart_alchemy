@@ -89,6 +89,7 @@
 
 				<footer class="mist-alchemy-actions">
 					<button type="button" data-action="clearAll" {{#if busy}}disabled{{/if}}><i class="fa-solid fa-rotate-left" inert></i> {{localize "MIST_ALCHEMY.Craft.Clear"}}</button>
+					{{#if freeLine}}<span class="mist-free-actions-line"><i class="fa-solid fa-hourglass-half" inert></i> {{freeLine}}</span>{{/if}}
 					<button type="button" class="brew" data-action="brew" {{#unless recipe.ready}}disabled{{/unless}} {{#if busy}}disabled{{/if}}>
 						<i class="fa-solid fa-flask-vial" inert></i> {{localize "MIST_ALCHEMY.Craft.Brew" difficulty=recipe.difficulty}}
 					</button>
@@ -159,6 +160,7 @@
 
 				<footer class="mist-alchemy-actions">
 					<button type="button" data-action="clearAll" {{#if busy}}disabled{{/if}}><i class="fa-solid fa-rotate-left" inert></i> {{localize "MIST_ALCHEMY.Craft.Clear"}}</button>
+					{{#if freeLine}}<span class="mist-free-actions-line"><i class="fa-solid fa-hourglass-half" inert></i> {{freeLine}}</span>{{/if}}
 					<button type="button" class="brew" data-action="research" {{#unless research.selected.ready}}disabled{{/unless}} {{#if busy}}disabled{{/if}}>
 						<i class="fa-solid fa-magnifying-glass" inert></i> {{localize "MIST_ALCHEMY.Research.Attempt" difficulty=research.selected.difficulty}}
 					</button>

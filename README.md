@@ -79,6 +79,10 @@ The GM can set a recipe's own research difficulty and starting counter in the re
 
 An item can give its user resources whenever one of its actions is used, for what a Daggerheart action cannot do by itself (an attack with a reaction roll cannot also grant Hope). Set the flag `flags.mist-age-alchemy.onUse` on the item, e.g. `{ "hope": 1 }`; keys are `hope`, `stress`, `hitPoints` and `fear` (the GM's Fear), positive values add and negative ones remove, clamped to the resource's range. A short chat line reports the change.
 
+## Free actions
+
+With The Mist Age - Free Actions active, every brewing and every recipe research attempt spends one of the character's free actions (none at 0, nothing is blocked), and the roll button shows how many are left.
+
 ## Macro API
 
 ```js

@@ -2,7 +2,9 @@ import {
 	CHANGED_HOOK, MODULE_ID, canCraft, getDifficulty, getKnownRecipeIds, getMix, isVessel, getKnownRecipes, getQuantity, getTrait, listRecipes,
 	listResearchable, setMaterial, setRecipeKnown
 } from "./data.js";
-import { brew, canPlace, evaluate, isUsableIngredient, isUsableVessel, research, researchState, researchTable } from "./crafting.js";
+import {
+	brew, canPlace, evaluate, freeActionsLine, isUsableIngredient, isUsableVessel, research, researchState, researchTable
+} from "./crafting.js";
 import { bindDragSources, bindDropZones } from "./drag.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
@@ -145,6 +147,7 @@ export class CraftWindow extends HandlebarsApplicationMixin(ApplicationV2) {
 		context.busy = this.busy;
 		context.traitLabel = traitLabel;
 		context.tab = this.tab;
+		context.freeLine = freeActionsLine(this.actor);
 		context.research = this.#researchContext();
 		const known = new Set(getKnownRecipeIds(this.actor));
 		context.recipes = this.#recipes().map(entry => ({
